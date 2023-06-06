@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Quisiin</string>
+    <string name="title_home">Home</string>
+    <string name="title_quiz">Quiz List</string>
+    <string name="title_profile">Profile</string>
+    <string name="welcome_hello">Hello!</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="welcome_subtitle">Welcome to the Quiz App! Here you can find a variety of quizzes to test your knowledge and have fun. Click the button below to get started!</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="new_here">New here?</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_number">Number</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="hint_age">Age</string>
+</resources>
