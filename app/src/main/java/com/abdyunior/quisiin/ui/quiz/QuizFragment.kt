@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.abdyunior.quisiin.databinding.FragmentQuizBinding
@@ -26,13 +25,12 @@ class QuizFragment : Fragment() {
             ViewModelProvider(this)[QuizViewModel::class.java]
 
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textQuiz
+        /*val textView: TextView = binding.textQuiz
         quizViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
-        return root
+        }*/
+        return binding.root
     }
 
     override fun onDestroyView() {

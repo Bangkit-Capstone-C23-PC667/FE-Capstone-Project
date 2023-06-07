@@ -18,4 +18,18 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="hint_age">Age</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_quiz_history">My Quiz History</string>
+    <string name="total_point">Total Points</string>
+    <string name="quiz_title">Quiz Title</string>
+    <string name="description">Description</string>
+    <string name="review">Review</string>
+    <string name="get_rewards">Get Rewards</string>
+    <string name="recommended_quizzes">Recommended Quizzes</string>
+    <string name="start">Start</string>
+    <string name="view">View</string>
+    <string name="get_started">Get Started</string>
+    <string name="my_question">My Question</string>
+    <string name="create_subtitle">Create your next Question and use the insights to make better decicions</string>
+    <string name="create_title">Have a Question That Comes to Mind?</string>
 </resources>

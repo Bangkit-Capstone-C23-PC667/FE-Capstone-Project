@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.abdyunior.quisiin.R
@@ -108,6 +109,11 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val age = binding.etAge.text.toString()
             val work = binding.etWork.text.toString()
+            val gender: String = when (binding.rgGender.checkedRadioButtonId) {
+                R.id.rbMale -> "Male"
+                R.id.rbFemale -> "Female"
+                else -> ""
+            }
             val password = binding.etPassword.text.toString()
             val confirmPassword = binding.etConfirmPassword.text.toString()
             when {
@@ -130,6 +136,9 @@ class RegisterActivity : AppCompatActivity() {
                 work.isEmpty() -> {
                     binding.tilWork.error = "Work is required"
                     binding.tilWork.isErrorEnabled = true
+                }
+                gender.isEmpty() -> {
+                    Toast.makeText(this, "Gender is required", Toast.LENGTH_SHORT).show()
                 }
                 password.isEmpty() -> {
                     binding.tilPassword.error = "Password is required"
