@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        binding.etEmail.doOnTextChanged { text, start, before, count ->
+        binding.etEmail.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty()) {
                 binding.tilEmail.error = null
                 binding.tilEmail.isErrorEnabled = false
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.etPassword.doOnTextChanged { text, start, before, count ->
+        binding.etPassword.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty()) {
                 binding.tilPassword.error = null
                 binding.tilPassword.isErrorEnabled = false

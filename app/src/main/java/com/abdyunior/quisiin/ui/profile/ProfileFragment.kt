@@ -1,5 +1,6 @@
 package com.abdyunior.quisiin.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.abdyunior.quisiin.databinding.FragmentProfileBinding
+import com.abdyunior.quisiin.ui.profile.edit.EditProfileActivity
 
 class ProfileFragment : Fragment() {
 
@@ -27,10 +29,9 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        /*val textView: TextView = binding.textProfile
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }*/
+        binding.btnEditProfile.setOnClickListener {
+            startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+        }
         return binding.root
     }
 

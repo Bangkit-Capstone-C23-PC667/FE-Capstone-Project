@@ -12,7 +12,7 @@
     <string name="new_here">New here?</string>
     <string name="create_an_account">Create an account</string>
     <string name="hint_name">Full Name</string>
-    <string name="hint_number">Number</string>
+    <string name="hint_phone">Phone</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="login">Login</string>
     <string name="already_have_an_account">Already have an account?</string>
@@ -32,4 +32,19 @@
     <string name="my_question">My Question</string>
     <string name="create_subtitle">Create your next Question and use the insights to make better decicions</string>
     <string name="create_title">Have a Question That Comes to Mind?</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="name">Name</string>
+    <string name="hint_gender">Gender</string>
+    <string name="hint_location">Location</string>
+    <string name="hint_work">Work</string>
+    <string name="hint_hobby">Hobby</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="cancel">Cancel</string>
+    <string name="create_quiz_title">Fill Your Details Quiz</string>
+    <string name="create_quiz">Create Quiz</string>
+    <string name="input_url">Input From URL</string>
+    <string name="your_url">Your URL</string>
+    <string name="quiz_image">Quiz Image</string>
+    <string name="title">Title</string>
+    <string name="choose">Choose</string>
 </resources>

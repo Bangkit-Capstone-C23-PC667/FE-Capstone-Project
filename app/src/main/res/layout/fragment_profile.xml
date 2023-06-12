@@ -5,17 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    //button logout
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivProfile"
-        android:layout_width="150dp"
+    <FrameLayout
+        android:id="@+id/flProfile"
+        android:layout_width="0dp"
         android:layout_height="150dp"
-        android:src="@drawable/ic_profile"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_profile"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnEditProfileIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/ic_edit"
+            android:contentDescription="@string/edit_profile"
+            android:padding="8dp"
+            android:tint="@android:color/white" />
+
+    </FrameLayout>
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvName"
@@ -27,7 +47,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/flProfile" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEditProfile"
@@ -126,6 +146,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQuizHistory" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="316dp"
+        android:background="@null"
+        app:layout_constraintBottom_toTopOf="@+id/rvQuizHistory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

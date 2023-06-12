@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.abdyunior.quisiin.databinding.FragmentHomeBinding
+import com.abdyunior.quisiin.ui.home.create.CreateQuizActivity
+import com.abdyunior.quisiin.ui.home.myquiz.MyQuizDetailActivity
+import com.abdyunior.quisiin.ui.quiz.fillquiz.QuizFillActivity
 import com.abdyunior.quisiin.ui.welcome.WelcomeActivity
 
 class HomeFragment : Fragment() {
@@ -33,8 +36,12 @@ class HomeFragment : Fragment() {
             textView.text = it
         }*/
 
-        binding.btnCreatedQuiz.setOnClickListener {
+        binding.btnWelcome.setOnClickListener {
             startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+        }
+
+        binding.btnCreatedQuiz.setOnClickListener {
+            startActivity(Intent(requireContext(), CreateQuizActivity::class.java))
         }
 
         return binding.root

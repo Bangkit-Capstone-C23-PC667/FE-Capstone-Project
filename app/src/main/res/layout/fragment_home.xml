@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnWelcome"
+        style="@style/Button"
+        android:paddingHorizontal="16dp"
+        android:layout_width="wrap_content"
+        android:text="Ke Welcome"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cvCreatedQuiz"
         android:layout_width="match_parent"
@@ -16,7 +29,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/btnWelcome">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

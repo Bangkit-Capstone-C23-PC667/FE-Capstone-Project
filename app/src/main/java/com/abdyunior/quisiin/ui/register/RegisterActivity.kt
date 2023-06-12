@@ -1,10 +1,10 @@
 package com.abdyunior.quisiin.ui.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
-import android.widget.Toast
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.abdyunior.quisiin.R
@@ -22,34 +22,38 @@ class RegisterActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.etName.doOnTextChanged { text, start, before, count ->
+        val genderOptions = arrayOf("Male", "Female")
+        val genderAdapter = ArrayAdapter(this, R.layout.dropdown_item, genderOptions)
+        binding.actvGender.setAdapter(genderAdapter)
+
+        binding.etName.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty() || text.isNotEmpty()) {
                 binding.tilName.error = null
                 binding.tilName.isErrorEnabled = false
             }
         }
 
-        binding.etNumber.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-            if (source.toString() == "0" && binding.etNumber.text.toString().isEmpty()) {
+        binding.etPhone.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
+            if (source.toString() == "0" && binding.etPhone.text.toString().isEmpty()) {
                 return@InputFilter ""
             }
             return@InputFilter source
         })
 
-        binding.etNumber.doOnTextChanged { text, start, before, count ->
+        binding.etPhone.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty()) {
-                binding.tilNumber.error = null
-                binding.tilNumber.isErrorEnabled = false
+                binding.tilPhone.error = null
+                binding.tilPhone.isErrorEnabled = false
             } else if (text.length > 11) {
-                binding.tilNumber.error = "Invalid Number"
-                binding.tilNumber.isErrorEnabled = true
+                binding.tilPhone.error = "Invalid Phone"
+                binding.tilPhone.isErrorEnabled = true
             } else {
-                binding.tilNumber.error = null
-                binding.tilNumber.isErrorEnabled = false
+                binding.tilPhone.error = null
+                binding.tilPhone.isErrorEnabled = false
             }
         }
 
-        binding.etEmail.doOnTextChanged { text, start, before, count ->
+        binding.etEmail.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty()) {
                 binding.tilEmail.error = null
                 binding.tilEmail.isErrorEnabled = false
@@ -66,21 +70,24 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        binding.etAge.doOnTextChanged { text, start, before, count ->
+        binding.etAge.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty() || text.isNotEmpty()) {
                 binding.tilAge.error = null
                 binding.tilAge.isErrorEnabled = false
             }
         }
 
-        binding.etWork.doOnTextChanged { text, start, before, count ->
-            if (text.isNullOrEmpty() || text.isNotEmpty()) {
-                binding.tilWork.error = null
-                binding.tilWork.isErrorEnabled = false
+        binding.actvGender.doOnTextChanged { text, _, _, _ ->
+            if (text.isNullOrEmpty()) {
+                binding.tilGender.error = "Gender is required"
+                binding.tilGender.isErrorEnabled = true
+            } else {
+                binding.tilGender.error = null
+                binding.tilGender.isErrorEnabled = false
             }
         }
 
-        binding.etPassword.doOnTextChanged { text, start, before, count ->
+        binding.etPassword.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty()) {
                 binding.tilPassword.error = null
                 binding.tilPassword.isErrorEnabled = false
@@ -96,7 +103,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        binding.etConfirmPassword.doOnTextChanged { text, start, before, count ->
+        binding.etConfirmPassword.doOnTextChanged { text, _, _, _ ->
             if (text.isNullOrEmpty() || text.isNotEmpty()) {
                 binding.tilConfirmPassword.error = null
                 binding.tilConfirmPassword.isErrorEnabled = false
@@ -105,15 +112,10 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             val name = binding.etName.text.toString()
-            val number = binding.etNumber.text.toString()
+            val Phone = binding.etPhone.text.toString()
             val email = binding.etEmail.text.toString()
             val age = binding.etAge.text.toString()
-            val work = binding.etWork.text.toString()
-            val gender: String = when (binding.rgGender.checkedRadioButtonId) {
-                R.id.rbMale -> "Male"
-                R.id.rbFemale -> "Female"
-                else -> ""
-            }
+            val gender = binding.actvGender.text.toString()
             val password = binding.etPassword.text.toString()
             val confirmPassword = binding.etConfirmPassword.text.toString()
             when {
@@ -121,9 +123,9 @@ class RegisterActivity : AppCompatActivity() {
                     binding.tilName.error = "Name is required"
                     binding.tilName.isErrorEnabled = true
                 }
-                number.isEmpty() -> {
-                    binding.tilNumber.error = "Number is required"
-                    binding.tilNumber.isErrorEnabled = true
+                Phone.isEmpty() -> {
+                    binding.tilPhone.error = "Phone is required"
+                    binding.tilPhone.isErrorEnabled = true
                 }
                 email.isEmpty() -> {
                     binding.tilEmail.error = "Email is required"
@@ -133,12 +135,9 @@ class RegisterActivity : AppCompatActivity() {
                     binding.tilAge.error = "Age is required"
                     binding.tilAge.isErrorEnabled = true
                 }
-                work.isEmpty() -> {
-                    binding.tilWork.error = "Work is required"
-                    binding.tilWork.isErrorEnabled = true
-                }
                 gender.isEmpty() -> {
-                    Toast.makeText(this, "Gender is required", Toast.LENGTH_SHORT).show()
+                    binding.tilGender.error = "Gender is required"
+                    binding.tilGender.isErrorEnabled = true
                 }
                 password.isEmpty() -> {
                     binding.tilPassword.error = "Password is required"
