@@ -2,7 +2,7 @@
 <resources>
     <style name="Theme.MyApp.MySplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splashscreen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_quisiin</item>
         <item name="postSplashScreenTheme">@style/Theme.Quisiin</item>
     </style>
 </resources>

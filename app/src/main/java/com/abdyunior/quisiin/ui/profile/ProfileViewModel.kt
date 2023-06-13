@@ -1,13 +1,19 @@
 package com.abdyunior.quisiin.ui.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.abdyunior.quisiin.data.response.LoginResult
+import com.abdyunior.quisiin.data.store.DataStorePreferences
+import kotlinx.coroutines.launch
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel(private val pref: DataStorePreferences) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+    fun getUser(): LiveData<LoginResult> {
+        return pref.getUser().asLiveData()
     }
-    val text: LiveData<String> = _text
+
+    fun logout() {
+        viewModelScope.launch {
+            pref.logout()
+        }
+    }
 }

@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
         }*/
 
         binding.btnWelcome.setOnClickListener {
-            startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+            startActivity(Intent(requireContext(), QuizFillActivity::class.java))
         }
 
         binding.btnCreatedQuiz.setOnClickListener {

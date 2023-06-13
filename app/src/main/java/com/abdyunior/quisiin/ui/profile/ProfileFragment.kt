@@ -1,15 +1,24 @@
 package com.abdyunior.quisiin.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.abdyunior.quisiin.data.store.DataStorePreferences
 import com.abdyunior.quisiin.databinding.FragmentProfileBinding
 import com.abdyunior.quisiin.ui.profile.edit.EditProfileActivity
+import com.abdyunior.quisiin.utils.ViewModelFactory
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "User")
 
 class ProfileFragment : Fragment() {
 
@@ -25,14 +34,34 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val profileViewModel =
-            ViewModelProvider(this)[ProfileViewModel::class.java]
+            ViewModelProvider(
+                this,
+                ViewModelFactory(
+                    DataStorePreferences.getInstance(requireContext().dataStore),
+                    requireContext()
+                )
+            )[ProfileViewModel::class.java]
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        binding.btnLogout.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure want to logout?")
+                .setPositiveButton("Yes") { _, _ ->
+                    profileViewModel.logout()
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.cancel()
+                }
+                .show()
+        }
 
         binding.btnEditProfile.setOnClickListener {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
         }
-        return binding.root
+        return root
     }
 
     override fun onDestroyView() {
