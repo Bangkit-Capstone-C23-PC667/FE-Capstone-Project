@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.abdyunior.quisiin.data.response.LoginResult
+import com.abdyunior.quisiin.data.response.Data
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -13,8 +13,6 @@ class DataStorePreferences private constructor(private val dataStore: DataStore<
     companion object {
         @Volatile
         private var INSTANCE: DataStorePreferences? = null
-        private val USERID_KEY = stringPreferencesKey("userId")
-        private val NAME_KEY = stringPreferencesKey("name")
         private val TOKEN_KEY = stringPreferencesKey("token")
 
         fun getInstance(dataStore: DataStore<Preferences>): DataStorePreferences {
@@ -26,28 +24,22 @@ class DataStorePreferences private constructor(private val dataStore: DataStore<
         }
     }
 
-    fun getUser(): Flow<LoginResult> {
+    fun getUser(): Flow<Data> {
         return dataStore.data.map { preferences ->
-            LoginResult(
-                preferences[USERID_KEY] ?: "",
-                preferences[NAME_KEY] ?: "",
-                preferences[TOKEN_KEY] ?: "",
+            Data(
+                preferences[TOKEN_KEY] ?: ""
             )
         }
     }
 
-    suspend fun saveUser(userId: String, name: String, token: String) {
+    suspend fun saveUser(token: String) {
         dataStore.edit { preferences ->
-            preferences[USERID_KEY] = userId
-            preferences[NAME_KEY] = name
             preferences[TOKEN_KEY] = token
         }
     }
 
     suspend fun logout() {
         dataStore.edit { preferences ->
-            preferences[USERID_KEY] = ""
-            preferences[NAME_KEY] = ""
             preferences[TOKEN_KEY] = ""
         }
     }

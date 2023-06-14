@@ -1,12 +1,20 @@
 package com.abdyunior.quisiin.ui.quiz
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.abdyunior.quisiin.data.store.DataStorePreferences
 import com.abdyunior.quisiin.databinding.FragmentQuizBinding
+import com.abdyunior.quisiin.utils.ViewModelFactory
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "User")
 
 class QuizFragment : Fragment() {
 
@@ -22,15 +30,21 @@ class QuizFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val quizViewModel =
-            ViewModelProvider(this)[QuizViewModel::class.java]
+            ViewModelProvider(
+                this,
+                ViewModelFactory(
+                    DataStorePreferences.getInstance(requireContext().dataStore),
+                    requireContext()
+                )
+            )[QuizViewModel::class.java]
 
         _binding = FragmentQuizBinding.inflate(inflater, container, false)
-
+        val root: View = binding.root
         /*val textView: TextView = binding.textQuiz
         quizViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }*/
-        return binding.root
+        return root
     }
 
     override fun onDestroyView() {

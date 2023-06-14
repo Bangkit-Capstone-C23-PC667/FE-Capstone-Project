@@ -11,7 +11,7 @@ class ApiConfig {
         val client = okhttp3.OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .build()
-        val retrofit = Retrofit.Builder().baseUrl("https://story-api.dicoding.dev/v1/")
+        val retrofit = Retrofit.Builder().baseUrl("https://be-capstone-project-aethyk4pbq-et.a.run.app")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

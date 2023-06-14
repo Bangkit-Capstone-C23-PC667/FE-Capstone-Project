@@ -3,31 +3,32 @@ package com.abdyunior.quisiin.data.response
 import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
-    @field:SerializedName("error")
-    val error: Boolean,
+
+    @field:SerializedName("data")
+    val data: Data?,
 
     @field:SerializedName("message")
     val message: String,
 
-    @field:SerializedName("loginResult")
-    val loginResult: LoginResult?
+    @field:SerializedName("status")
+    val status: String
 )
 
-data class LoginResult(
-    @field:SerializedName("userId")
-    val userId: String,
+data class RegisterResponse(
 
-    @field:SerializedName("name")
-    val name: String,
+    @field:SerializedName("data")
+    val data: Data?,
+
+    @field:SerializedName("message")
+    val message: String,
+
+    @field:SerializedName("status")
+    val status: String
+)
+
+data class Data(
 
     @field:SerializedName("token")
     val token: String
 )
 
-data class RegisterResponse(
-    @field:SerializedName("error")
-    val error: Boolean,
-
-    @field:SerializedName("message")
-    val message: String
-)

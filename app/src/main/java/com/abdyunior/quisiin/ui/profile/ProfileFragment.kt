@@ -22,6 +22,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class ProfileFragment : Fragment() {
 
+    private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
@@ -33,7 +34,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
+        profileViewModel =
             ViewModelProvider(
                 this,
                 ViewModelFactory(
