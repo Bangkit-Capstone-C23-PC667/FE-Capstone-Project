@@ -1,11 +1,9 @@
 package com.abdyunior.quisiin.ui.login
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.abdyunior.quisiin.data.api.ApiConfig
+import com.abdyunior.quisiin.data.response.Data
 import com.abdyunior.quisiin.data.response.LoginRequest
 import com.abdyunior.quisiin.data.response.LoginResponse
 import com.abdyunior.quisiin.data.store.DataStorePreferences
@@ -52,18 +50,11 @@ class LoginViewModel(private val pref: DataStorePreferences) : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
-
     }
 
     fun saveUser(token: String) {
         viewModelScope.launch {
             pref.saveUser(token)
-        }
-    }
-
-    fun logout() {
-        viewModelScope.launch {
-            pref.logout()
         }
     }
 }

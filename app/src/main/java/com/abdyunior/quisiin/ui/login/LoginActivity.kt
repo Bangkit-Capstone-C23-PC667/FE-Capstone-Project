@@ -77,16 +77,37 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        binding.etEmail.doOnTextChanged { _, _, _, _ ->
-            binding.tilEmail.error = null
-            binding.tilEmail.isErrorEnabled = false
-            binding.tilEmail.endIconDrawable = null
+        binding.etEmail.doOnTextChanged { text, _, _, _ ->
+            if (text.isNullOrEmpty()) {
+                binding.tilEmail.error = null
+                binding.tilEmail.isErrorEnabled = false
+                binding.tilEmail.endIconDrawable = null
+            } else if (!isValidEmail(text.toString())) {
+                binding.tilEmail.error = "Invalid Email"
+                binding.tilEmail.isErrorEnabled = true
+                binding.tilEmail.errorIconDrawable =
+                    ContextCompat.getDrawable(this, R.drawable.ic_error)
+            } else {
+                binding.tilEmail.error = null
+                binding.tilEmail.isErrorEnabled = false
+                binding.tilEmail.endIconDrawable = null
+            }
         }
 
-        binding.etPassword.doOnTextChanged { _, _, _, _ ->
-            binding.tilPassword.error = null
-            binding.tilPassword.isErrorEnabled = false
-            binding.tilPassword.errorIconDrawable = null
+        binding.etPassword.doOnTextChanged { text, _, _, _ ->
+            if (text.isNullOrEmpty()) {
+                binding.tilPassword.error = null
+                binding.tilPassword.isErrorEnabled = false
+                binding.tilPassword.errorIconDrawable = null
+            } else if (text.length < 8) {
+                binding.tilPassword.error = "Password must be at least 8 characters"
+                binding.tilPassword.isErrorEnabled = true
+                binding.tilPassword.errorIconDrawable = null
+            } else {
+                binding.tilPassword.error = null
+                binding.tilPassword.isErrorEnabled = false
+                binding.tilPassword.errorIconDrawable = null
+            }
         }
 
         binding.btnLogin.setOnClickListener {
@@ -110,5 +131,10 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = Regex("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
+        return email.matches(emailRegex)
     }
 }

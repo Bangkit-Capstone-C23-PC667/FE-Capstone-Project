@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdyunior.quisiin.data.store.DataStorePreferences
 import com.abdyunior.quisiin.databinding.FragmentProfileBinding
 import com.abdyunior.quisiin.ui.profile.edit.EditProfileActivity
+import com.abdyunior.quisiin.ui.welcome.WelcomeActivity
 import com.abdyunior.quisiin.utils.ViewModelFactory
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "User")
@@ -57,6 +58,13 @@ class ProfileFragment : Fragment() {
                     dialog.cancel()
                 }
                 .show()
+        }
+
+        profileViewModel.getUser().observe(viewLifecycleOwner) { data ->
+            if (data.token.isEmpty()) {
+                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+                requireActivity().finish()
+            }
         }
 
         binding.btnEditProfile.setOnClickListener {

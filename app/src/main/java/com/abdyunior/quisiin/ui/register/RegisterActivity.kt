@@ -3,10 +3,13 @@ package com.abdyunior.quisiin.ui.register
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
+import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import com.abdyunior.quisiin.R
 import com.abdyunior.quisiin.databinding.ActivityRegisterBinding
 import com.abdyunior.quisiin.ui.login.LoginActivity
@@ -14,6 +17,7 @@ import com.abdyunior.quisiin.ui.login.LoginActivity
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var viewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +25,30 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[RegisterViewModel::class.java]
+
+        viewModel.status.observe(this) {
+            if (it == "400") {
+                Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.message.observe(this) {
+            if (it == "201") {
+                Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
+
+        viewModel.isLoading.observe(this) {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
 
         val genderOptions = arrayOf("Male", "Female")
         val genderAdapter = ArrayAdapter(this, R.layout.dropdown_item, genderOptions)
@@ -111,19 +139,19 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnRegister.setOnClickListener {
-            val name = binding.etName.text.toString()
-            val Phone = binding.etPhone.text.toString()
+            val nama = binding.etName.text.toString()
+            val phone = binding.etPhone.text.toString()
             val email = binding.etEmail.text.toString()
-            val age = binding.etAge.text.toString()
+            val ageText = binding.etAge.text.toString()
             val gender = binding.actvGender.text.toString()
             val password = binding.etPassword.text.toString()
             val confirmPassword = binding.etConfirmPassword.text.toString()
             when {
-                name.isEmpty() -> {
+                nama.isEmpty() -> {
                     binding.tilName.error = "Name is required"
                     binding.tilName.isErrorEnabled = true
                 }
-                Phone.isEmpty() -> {
+                phone.isEmpty() -> {
                     binding.tilPhone.error = "Phone is required"
                     binding.tilPhone.isErrorEnabled = true
                 }
@@ -131,7 +159,7 @@ class RegisterActivity : AppCompatActivity() {
                     binding.tilEmail.error = "Email is required"
                     binding.tilEmail.isErrorEnabled = true
                 }
-                age.isEmpty() -> {
+                ageText.isEmpty() -> {
                     binding.tilAge.error = "Age is required"
                     binding.tilAge.isErrorEnabled = true
                 }
@@ -148,7 +176,21 @@ class RegisterActivity : AppCompatActivity() {
                     binding.tilConfirmPassword.isErrorEnabled = true
                 }
                 else -> {
-                    //implement viewmodel
+                    val umur = ageText.toIntOrNull()
+                    if (umur == null) {
+                        binding.tilAge.error = "Invalid Age"
+                        binding.tilAge.isErrorEnabled = true
+                    } else {
+                        viewModel.register(
+                            nama,
+                            phone,
+                            email,
+                            umur,
+                            gender,
+                            password,
+                            confirmPassword
+                        )
+                    }
                 }
             }
 
