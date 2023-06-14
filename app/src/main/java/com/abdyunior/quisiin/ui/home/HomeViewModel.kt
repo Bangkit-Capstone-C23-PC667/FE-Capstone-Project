@@ -9,6 +9,7 @@ import com.abdyunior.quisiin.data.store.DataStorePreferences
 
 class HomeViewModel(private val preferences: DataStorePreferences) : ViewModel() {
 
+
     fun getUser(): LiveData<Data> {
         return preferences.getUser().asLiveData()
     }

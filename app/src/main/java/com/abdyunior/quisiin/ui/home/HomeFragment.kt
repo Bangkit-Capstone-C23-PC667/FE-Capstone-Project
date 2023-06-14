@@ -15,6 +15,7 @@ import com.abdyunior.quisiin.data.store.DataStorePreferences
 import com.abdyunior.quisiin.databinding.FragmentHomeBinding
 import com.abdyunior.quisiin.ui.home.create.CreateQuizActivity
 import com.abdyunior.quisiin.ui.home.myquiz.MyQuizDetailActivity
+import com.abdyunior.quisiin.ui.profile.edit.EditProfileActivity
 import com.abdyunior.quisiin.ui.quiz.fillquiz.QuizFillActivity
 import com.abdyunior.quisiin.ui.welcome.WelcomeActivity
 import com.abdyunior.quisiin.utils.ViewModelFactory
@@ -51,7 +52,7 @@ class HomeFragment : Fragment() {
         }*/
 
         binding.btnCompleteProfile.setOnClickListener {
-            startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+            startActivity(Intent(requireContext(), EditProfileActivity::class.java))
         }
 
         binding.btnCreatedQuiz.setOnClickListener {

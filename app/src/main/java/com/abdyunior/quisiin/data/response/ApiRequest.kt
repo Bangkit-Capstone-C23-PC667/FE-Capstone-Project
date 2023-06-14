@@ -14,3 +14,16 @@ data class RegisterRequest(
     val password: String,
     val confirm_password: String
 )
+
+/*data class CreateKuesionerRequest(
+    val judul: String,
+    val deskripsi: String,
+    val rentang_usia: Int,
+    val link: String,
+    val image: String
+)*/
+
+data class HistoryRequest(
+    val title: String,
+    val description: String
+)

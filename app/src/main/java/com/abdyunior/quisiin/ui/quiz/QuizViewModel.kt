@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.abdyunior.quisiin.data.api.ApiConfig
+import com.abdyunior.quisiin.data.response.Data
 import com.abdyunior.quisiin.data.response.DataItem
 import com.abdyunior.quisiin.data.response.KuesionerResponse
 import com.abdyunior.quisiin.data.store.DataStorePreferences
@@ -20,9 +22,9 @@ class QuizViewModel(private val pref: DataStorePreferences) : ViewModel() {
     private val _kuesionerList = MutableLiveData<List<DataItem>>()
     val kuesionerList: LiveData<List<DataItem>> = _kuesionerList
 
-    fun getAllKuesioner() {
+    fun getAllKuesioner(token: String) {
         _isLoading.value = true
-        val client = ApiConfig().getApiService().getAllKuesioner()
+        val client = ApiConfig().getApiService().getAllKuesioner(token)
         client.enqueue(object : Callback<KuesionerResponse> {
             override fun onResponse(
                 call: Call<KuesionerResponse>,
@@ -40,6 +42,10 @@ class QuizViewModel(private val pref: DataStorePreferences) : ViewModel() {
             }
 
         })
+    }
+
+    fun getUser(): LiveData<Data> {
+        return pref.getUser().asLiveData()
     }
 
 }

@@ -47,4 +47,15 @@
     <string name="quiz_image">Quiz Image</string>
     <string name="title">Title</string>
     <string name="choose">Choose</string>
+    <string name="hint_Kategori">Kategori</string>
+    <string-array name="title_quiz">
+        <item>Pengaruh Cedera Terhapap Atlet</item>
+        <item>Klasifikasi Padi Sehat</item>
+        <item>Minat Mahasiswa Terhadap Jurusan</item>
+    </string-array>
+    <string-array name="description_quiz">
+        <item>Kuesioner singkat ini bertujuan untuk mengeksplorasi dampak cedera terhadap performa dan kesejahteraan atlet.</item>
+        <item>Kuesioner ini bertujuan untuk mengklasifikasikan jenis padi yang sehat berdasarkan berbagai faktor penilaian yang relevan.</item>
+        <item>Kuesioner ini bertujuan untuk mengukur minat mahasiswa terhadap jurusan yang ditawarkan.</item>
+    </string-array>
 </resources>

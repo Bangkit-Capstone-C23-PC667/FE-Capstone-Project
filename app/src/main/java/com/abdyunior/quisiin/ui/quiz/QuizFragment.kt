@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -71,11 +72,21 @@ class QuizFragment : Fragment() {
             rvQuiz.adapter = quizAdapter
         }
 
-        quizViewModel.kuesionerList.observe(viewLifecycleOwner) {
-            quizAdapter.submitList(it)
+        quizViewModel.getUser().observe(viewLifecycleOwner) { user ->
+            quizViewModel.getAllKuesioner("Bearer ${user.token}")
+            quizViewModel.kuesionerList.observe(viewLifecycleOwner) {
+                quizAdapter.submitList(it)
+            }
         }
 
-        quizViewModel.getAllKuesioner()
+        /*quizViewModel.kuesionerList.observe(viewLifecycleOwner) {
+            quizAdapter.submitList(it)
+        }*/
+        quizViewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.progressBar.isVisible = it
+        }
+
+        /*quizViewModel.getAllKuesioner(token)*/
     }
 
     override fun onDestroyView() {
@@ -85,6 +96,7 @@ class QuizFragment : Fragment() {
 
     fun onKuesionerItemClick(kuesioner: DataItem) {
         val intent = Intent(requireContext(), QuizFillActivity::class.java)
-        /*intent.putExtra(QuizFillActivity.EXTRA_KUESIONER, kuesioner)*/
+        intent.putExtra(QuizFillActivity.EXTRA_KUESIONER, kuesioner)
+        startActivity(intent)
     }
 }

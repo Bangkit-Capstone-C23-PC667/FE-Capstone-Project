@@ -1,12 +1,10 @@
 package com.abdyunior.quisiin.data.api
 
 import com.abdyunior.quisiin.data.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
     @POST("users/login")
@@ -16,5 +14,26 @@ interface ApiService {
     fun register(@Body request: RegisterRequest): Call<RegisterResponse>
 
     @GET("kuesioners")
-    fun getAllKuesioner(): Call<KuesionerResponse>
+    fun getAllKuesioner(
+        @Header("Authorization") token: String
+    ): Call<KuesionerResponse>
+
+    @Multipart
+    @POST("kuesioners")
+    fun createKuesioner(
+        @Header("Authorization") token: String,
+        @Part("link") link: RequestBody,
+        @Part file: MultipartBody.Part, // Tambahkan ini untuk mengirim gambar
+        @Part("judul") judul: RequestBody,
+        @Part("deskripsi") deskripsi: RequestBody,
+        @Part("rentang_usia") rentangUsia: RequestBody,
+        @Part("kategori_id[0]") kategoriId: RequestBody
+    ): Call<CreateKuesionerResponse>
+
+    @Multipart
+    @POST("users/profile/picture")
+    fun uploadProfilePicture(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part
+    ): Call<UploadProfilePictureResponse>
 }
