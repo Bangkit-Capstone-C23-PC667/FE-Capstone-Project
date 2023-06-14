@@ -74,6 +74,9 @@ class QuizFragment : Fragment() {
         quizViewModel.kuesionerList.observe(viewLifecycleOwner) {
             quizAdapter.submitList(it)
         }
+        quizViewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        }
 
         quizViewModel.getAllKuesioner()
     }
@@ -85,6 +88,7 @@ class QuizFragment : Fragment() {
 
     fun onKuesionerItemClick(kuesioner: DataItem) {
         val intent = Intent(requireContext(), QuizFillActivity::class.java)
-        /*intent.putExtra(QuizFillActivity.EXTRA_KUESIONER, kuesioner)*/
+        intent.putExtra(QuizFillActivity.EXTRA_KUESIONER, kuesioner)
+        startActivity(intent)
     }
 }

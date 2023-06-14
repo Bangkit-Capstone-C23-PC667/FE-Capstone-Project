@@ -1,6 +1,8 @@
 package com.abdyunior.quisiin.data.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class LoginResponse(
 
@@ -44,6 +46,7 @@ data class KuesionerResponse(
     val status: String
 )
 
+@Parcelize
 data class DataItem(
 
     @field:SerializedName("jumlah_rating")
@@ -81,4 +84,4 @@ data class DataItem(
 
     @field:SerializedName("updatedAt")
     val updatedAt: String?
-)
+) : Parcelable

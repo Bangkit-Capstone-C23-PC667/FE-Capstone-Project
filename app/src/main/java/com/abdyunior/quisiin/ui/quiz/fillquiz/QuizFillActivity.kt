@@ -9,6 +9,10 @@ import com.abdyunior.quisiin.databinding.ActivityQuizFillBinding
 
 class QuizFillActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXTRA_KUESIONER = "extra_kuesioner"
+    }
+
     private lateinit var webView: WebView
     private lateinit var binding: ActivityQuizFillBinding
 
