@@ -78,9 +78,6 @@ class QuizFragment : Fragment() {
                 quizAdapter.submitList(it)
             }
         }
-        quizViewModel.isLoading.observe(viewLifecycleOwner) {
-            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
-        }
 
         /*quizViewModel.kuesionerList.observe(viewLifecycleOwner) {
             quizAdapter.submitList(it)
