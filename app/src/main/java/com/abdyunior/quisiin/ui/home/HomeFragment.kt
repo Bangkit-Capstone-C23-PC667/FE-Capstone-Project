@@ -11,6 +11,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.abdyunior.quisiin.data.response.DataItemKuesioner
 import com.abdyunior.quisiin.data.store.DataStorePreferences
 import com.abdyunior.quisiin.databinding.FragmentHomeBinding
 import com.abdyunior.quisiin.ui.home.create.CreateQuizActivity
@@ -29,13 +31,15 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var Adapter: MyQuizAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
+        homeViewModel =
             ViewModelProvider(
                 this,
                 ViewModelFactory(
@@ -50,6 +54,19 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }*/
+        Adapter = MyQuizAdapter(this)
+        binding.apply {
+            MyQuiz.adapter = Adapter
+            MyQuiz.layoutManager = LinearLayoutManager(requireContext())
+            MyQuiz.setHasFixedSize(true)
+        }
+
+        homeViewModel.getUser().observe(viewLifecycleOwner) {
+            homeViewModel.getAllKuesionerByUser("Bearer ${it.token}")
+            homeViewModel.kuesionerList.observe(viewLifecycleOwner) { kuesioner ->
+                Adapter.submitList(kuesioner)
+            }
+        }
 
         binding.btnCompleteProfile.setOnClickListener {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
@@ -60,6 +77,13 @@ class HomeFragment : Fragment() {
         }
 
         return root
+    }
+
+    fun onKuesionerItemClick(kuesioner: DataItemKuesioner) {
+        /*startActivity(Intent(requireContext(), MyQuizDetailActivity::class.java).apply {
+            putExtra("kuesionerId", kuesionerId)
+        })
+    }*/
     }
 
     override fun onDestroyView() {

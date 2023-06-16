@@ -30,10 +30,20 @@ interface ApiService {
         @Part("kategori_id[0]") kategoriId: RequestBody
     ): Call<CreateKuesionerResponse>
 
+    @GET("users/profile/kuesioner")
+    fun getKuesionerByUser(
+        @Header("Authorization") token: String
+    ): Call<UserKuesionerResponse>
+
     @Multipart
     @POST("users/profile/picture")
     fun uploadProfilePicture(
         @Header("Authorization") token: String,
         @Part file: MultipartBody.Part
     ): Call<UploadProfilePictureResponse>
+
+    @GET("users/profile")
+    fun getProfile(
+        @Header("Authorization") token: String
+    ): Call<ProfileResponse>
 }

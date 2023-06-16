@@ -83,7 +83,6 @@ class CreateQuizActivity : AppCompatActivity() {
                 ).observe(this) { CreateKuesionerResponse ->
                     if (CreateKuesionerResponse != null) {
                         Toast.makeText(this, "Create Kuesioner Berhasil", Toast.LENGTH_SHORT).show()
-                        Log.d("TAG", "createQuiz: ${it.token}")
                         finish()
                     } else {
                         Toast.makeText(this, "Create Kuesioner Gagal", Toast.LENGTH_SHORT).show()
@@ -93,28 +92,8 @@ class CreateQuizActivity : AppCompatActivity() {
             viewModel.isLoading.observe(this) {
                 //
             }
-        }
-        /*val judul = binding.etQuizTitle.text.toString()
-        val deskripsi = binding.etDescription.text.toString()
-        val link = binding.etInputQuiz.text.toString()
-        val rentangUsia = binding.etAge.text.toString().toInt()
-        val image = getFile
-        if (judul.isEmpty() || deskripsi.isEmpty() || image == null) {
-            Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show()
         } else {
-            viewModel.getUser().observe(this) { data ->
-                data?.let {
-                    viewModel.createKuesioner(
-                        "Bearer ${it.token}",
-                        link,
-                        image,
-                        judul,
-                        deskripsi,
-                        rentangUsia
-                    )
-                }
-            }
+            Toast.makeText(this, "Gambar Belum Dipilih", Toast.LENGTH_SHORT).show()
         }
-    }*/
     }
 }

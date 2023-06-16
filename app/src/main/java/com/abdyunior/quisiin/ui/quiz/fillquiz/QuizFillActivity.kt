@@ -24,6 +24,9 @@ class QuizFillActivity : AppCompatActivity() {
         binding = ActivityQuizFillBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         webView = binding.webView
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = WebViewClient()
@@ -37,11 +40,8 @@ class QuizFillActivity : AppCompatActivity() {
         webView.loadUrl(formUrl)
     }
 
-    override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            super.onBackPressed()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }

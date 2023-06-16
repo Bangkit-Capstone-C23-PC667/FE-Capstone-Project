@@ -181,3 +181,110 @@ data class UploadProfilePictureResponse(
     @field:SerializedName("message")
     val message: String?
 )
+
+data class ProfileResponse(
+
+    @field:SerializedName("data")
+    val data: ProfileData,
+
+    @field:SerializedName("message")
+    val message: String,
+
+    @field:SerializedName("status")
+    val status: String
+)
+
+data class ProfileData(
+
+    @field:SerializedName("image")
+    val image: String,
+
+    @field:SerializedName("umur")
+    val umur: Int,
+
+    @field:SerializedName("gender")
+    val gender: String,
+
+    @field:SerializedName("pendidikan")
+    val pendidikan: String,
+
+    @field:SerializedName("poin")
+    val poin: Int,
+
+    @field:SerializedName("asal")
+    val asal: String,
+
+    @field:SerializedName("createdAt")
+    val createdAt: String,
+
+    @field:SerializedName("nama")
+    val nama: String,
+
+    @field:SerializedName("pekerjaan")
+    val pekerjaan: String,
+
+    @field:SerializedName("user_id")
+    val userId: Int,
+
+    @field:SerializedName("phone")
+    val phone: String,
+
+    @field:SerializedName("email")
+    val email: String,
+
+    @field:SerializedName("hobi")
+    val hobi: String,
+
+    @field:SerializedName("updatedAt")
+    val updatedAt: String
+)
+data class UserKuesionerResponse(
+
+    @field:SerializedName("data")
+    val data: List<DataItemKuesioner>,
+
+    @field:SerializedName("message")
+    val message: String,
+
+    @field:SerializedName("status")
+    val status: String
+)
+
+data class DataItemKuesioner(
+
+    @field:SerializedName("jumlah_rating")
+    val jumlahRating: Int,
+
+    @field:SerializedName("image")
+    val image: String,
+
+    @field:SerializedName("createdAt")
+    val createdAt: String,
+
+    @field:SerializedName("kategori_id")
+    val kategoriId: Int,
+
+    @field:SerializedName("rata_rata_rating")
+    val rataRataRating: Int,
+
+    @field:SerializedName("user_id")
+    val userId: Int,
+
+    @field:SerializedName("link")
+    val link: String,
+
+    @field:SerializedName("kuesioner_id")
+    val kuesionerId: Int,
+
+    @field:SerializedName("deskripsi")
+    val deskripsi: String,
+
+    @field:SerializedName("judul")
+    val judul: String,
+
+    @field:SerializedName("rentang_usia")
+    val rentangUsia: Int,
+
+    @field:SerializedName("updatedAt")
+    val updatedAt: String
+)

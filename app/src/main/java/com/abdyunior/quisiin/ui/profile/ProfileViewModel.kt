@@ -3,6 +3,7 @@ package com.abdyunior.quisiin.ui.profile
 import androidx.lifecycle.*
 import com.abdyunior.quisiin.data.api.ApiConfig
 import com.abdyunior.quisiin.data.response.Data
+import com.abdyunior.quisiin.data.response.ProfileResponse
 import com.abdyunior.quisiin.data.response.UploadProfilePictureResponse
 import com.abdyunior.quisiin.data.store.DataStorePreferences
 import kotlinx.coroutines.Dispatchers

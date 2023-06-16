@@ -8,6 +8,7 @@ import com.abdyunior.quisiin.ui.home.HomeViewModel
 import com.abdyunior.quisiin.ui.home.create.CreateViewModel
 import com.abdyunior.quisiin.ui.login.LoginViewModel
 import com.abdyunior.quisiin.ui.profile.ProfileViewModel
+import com.abdyunior.quisiin.ui.profile.edit.EditProfileViewModel
 import com.abdyunior.quisiin.ui.quiz.QuizViewModel
 
 class ViewModelFactory(private val pref: DataStorePreferences, private val context: Context) :
@@ -29,6 +30,9 @@ class ViewModelFactory(private val pref: DataStorePreferences, private val conte
             }
             modelClass.isAssignableFrom(CreateViewModel::class.java) -> {
                 CreateViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
+                EditProfileViewModel(pref) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
