@@ -36,4 +36,12 @@ class QuizFillActivity : AppCompatActivity() {
 
         webView.loadUrl(formUrl)
     }
+
+    override fun onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
