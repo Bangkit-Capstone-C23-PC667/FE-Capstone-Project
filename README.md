@@ -29,7 +29,7 @@ Please note that the app is currently available for Android devices only.
 
 To get started with the Quisiin mobile app, follow these steps:
 
-1. Clone the repository: `https://github.com/Bangkit-Capstone-C23-PC667/FE-Capstone-Project.git`
+1. Clone the repository: `git clone https://github.com/Bangkit-Capstone-C23-PC667/FE-Capstone-Project.git`
 2. Install the necessary dependencies (Android Studio, Kotlin, etc.)
 3. Configure the necessary API endpoints and credentials
 4. Build and run the app using Android Studio or the command line
